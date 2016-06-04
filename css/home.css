@@ -1,0 +1,38 @@
+body{
+  background-color:#212121;
+  text-align:center;
+}
+/* #search{
+  opacity :  ;
+  border : 5px solid pink ;
+  color : #64FFDA ;
+  font-size : 80px
+  background-color : pink;
+} */
+.searchbox input.lightsearch {
+    background:  no-repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: white;
+    font-size: 15px;
+    height: 35px;
+    margin-top: 24px;
+    padding: 2px 5px 2px 24px;
+    width: 270px;
+    border : 3px solid #64FFDA ;
+    border-radius : 5px;
+    
+}
+
+a:hover {
+  text-decoration: none;
+}
+a{
+   color : black ;
+}
+
+#top
+{
+/*   position : absolute ; */
+  height:100px ;
+  
+}
