@@ -21,9 +21,14 @@ $(document).ready(function(){
           
           var len = data[1].length;
           //alert(len);
+          // alert(data[3][2]) ;
           for(var i=0 ; i<len ; i++)
             {
-           ht = "<a href='" + data[3][i] + "' target='_blank'><div class='well'><h4><b>"+data[1][i]+"</b></h4><h5>"+ data[2][i] + "</h5></div></a>";
+              var unique = data[3][i].split("/") ;
+              // console.log(unique) ;
+              var pass = "preview.php?link=" + unique[4] ;
+              // console.log(pass) ;
+           ht = "<a href='" + pass + "' target='_blank'><div class='well'><h4><b>"+data[1][i]+"</b></h4><h5>"+ data[2][i] + "</h5></div></a>";
           
           $(".container").append(ht);
             }
