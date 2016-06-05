@@ -22,7 +22,27 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    var link = "<?php echo $link ; ?>";
+    var new_link = "<?php echo $link ; ?>";
+    // console.log("search elemet is : " + link) ;
+
+    var arr = new_link.split(" ") ;
+    var siz = arr.length ;
+    console.log("bcdsjvnc akj cnsdkcjnv" + arr) ;
+    for(var i = 0 ; i < siz ; i++)
+    {
+    	arr[i] = encodeURIComponent(arr[i]) ;
+    }
+
+console.log(link);
+    
+    var link = arr.join("_") ; 
+
+
+
+
+
+    // link = encodeURIComponent(new_link) ;
+    // console.log("after encoding : " + link);
     var extract_data = "" ;
     // alert(link) ;
 
@@ -44,7 +64,7 @@ $.ajax({
           extract_data = data["query"].pages[pageid].extract ;
           // console.log("data is : " + extract_data);
          
-          var cont = "<br><br><h2>"+ link +"</h2>  \
+          var cont = "<br><br><h2>"+ new_link +"</h2>  \
 			<br>"
 
 
@@ -87,7 +107,9 @@ $.ajax({
 
 					var wiki = "<br><a href='https://en.wikipedia.org/wiki/"+ link + "' target='_blank'><button class='btn btn-block' id='wiki_btn'>Link to Wikipedia Page</button></a>" ;
 
-					var analyze = "<br><a href='analyze.php'><button class='btn btn-circle-lg button'>Analyze</button>" ;
+					console.log("value of link is :" + link) ;
+
+					var analyze = "<br><a href='analyze.php?s=" + link + "' target='_blank'><button class='btn btn-circle-lg button'>Analyze</button>" ;
 
 
 					$("#wiki-anly").append(wiki) ;

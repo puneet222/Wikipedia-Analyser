@@ -8,7 +8,21 @@ $(document).ready(function(){
     if(e.which == '13'){
       var x = $("#bar").val() ;
   //alert(x);
-      var search = x ;
+
+    var arr = x.split(" ") ;
+    var siz = arr.length ;
+   
+    for(var i = 0 ; i < siz ; i++)
+    {
+      arr[i] = encodeURIComponent(arr[i]) ;
+    }
+
+
+
+
+      var search = arr.join("+") ;
+
+      console.log(search) ;
       
       $.ajax({
         type: "GET",
@@ -22,6 +36,7 @@ $(document).ready(function(){
           var len = data[1].length;
           //alert(len);
           // alert(data[3][2]) ;
+          $("#result").empty();
           for(var i=0 ; i<len ; i++)
             {
               var unique = data[3][i].split("/") ;
@@ -30,7 +45,7 @@ $(document).ready(function(){
               // console.log(pass) ;
            ht = "<a href='" + pass + "' target='_blank'><div class='well'><h4><b>"+data[1][i]+"</b></h4><h5>"+ data[2][i] + "</h5></div></a>";
           
-          $(".container").append(ht);
+          $("#result").append(ht);
             }
           
            $(".well").hover(function(){
