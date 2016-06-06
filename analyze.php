@@ -22,6 +22,15 @@
   </form>
 
   </div>
+
+  
+  <div id="form2">
+  <form action="ajax2.php" id="pass2" method="post">
+  <input type="hidden" name="views" id="views">
+  <input type="hidden" name="year" id="year">
+  <input type="hidden" name="mon" id="mon">
+  <input type="hidden" name="dt" id="dt">	
+  </div>
   <?php 
   $getvar = $_GET['s'] ;
   ?>
@@ -89,7 +98,8 @@
           	$("#form").append("<button id='click'>alayze</button>");
 
 
-          	$(document).click(function(){
+          	$("#click").click(function(){
+          		alert("click") ;
           		$("#pass").submit();
           	})
 
@@ -98,7 +108,71 @@
 
 
        
-      })
+      }) // ajax 1
+
+   	 $.ajax({
+        type: "GET",
+        url : "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/all-agents/C%2B%2B11/daily/2008100600/2016060500",
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        dataType : "json" ,
+        success: function(data , textStatus, jqXHR){
+          console.log(data);
+		  var len = (data["items"]).length ;
+		  var views = [] ;
+		  var date = [] ;
+          for(var i = 0 ; i < len ; i++)
+          {
+          	views.push(data["items"][i]["views"]) ;
+          	date.push(data["items"][i]["timestamp"]) ;
+          }
+
+          var year = [] ;
+          var mon = [] ;
+          var dt = [] ;
+          console.log(date[2]);
+          for(var i = 0 ; i < len ; i++)
+          {
+          	var snum = (date[i]).toString()
+          	var arr = snum.split("") ;
+          	
+          	var y = arr[0]+arr[1]+arr[2]+arr[3] ;
+          	var m = arr[4]+arr[5];
+          	var d = arr[6]+arr[7];
+
+
+          	year.push(y);
+          	mon.push(m);
+          	dt.push(d);
+
+          }
+
+          var pass_views = views.join(",") ;
+          var pass_year = year.join(",");
+          var pass_mon = mon.join(",");
+          var pass_dt = dt.join(",");
+
+
+          $("#views").val(pass_views);
+          $("#year").val(pass_year);
+          $("#mon").val(pass_mon);
+          $("#dt").val(pass_dt);
+
+
+          $("#form2").append("<button id='views_btn'>Views</button>") ;
+
+          $("#views_btn").click(function(){
+          	alert("dcndkjvnknve") ;
+
+          	$("#pass2").submit() ;
+          })
+
+
+
+
+          
+      } // success function
+  })// ajax
 
    </script>
 

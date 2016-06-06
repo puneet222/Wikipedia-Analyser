@@ -1,29 +1,32 @@
 <?php
 
-$type = $_POST["type"] ;
-$name = $_POST["name"] ;
-$link = $_POST["link"] ;
+$views = $_POST["views"] ;
+$year = $_POST["year"] ;
+$mon = $_POST["mon"] ;
+$dt = $_POST["dt"] ;
 
+// echo $views ;
+// echo $year ;
+echo $mon ;
+// echo $dt ;
 
-echo $type ;
-echo $name ;
-echo $link ;
+$dviews = explode(",", $views) ;
+$dyear = explode("," , $year) ;
+$dmon = explode("," , $mon) ;
+$dt = explode(",", $dt) ;
 
-
-
-$dtype = explode(",", $type) ;
-$dname = explode(",", $name) ;
-$dlink = explode(",", $link) ;
+echo $dmon[10] ;
+echo "07" ;
 
 include("dbcon.php") ;
 
-$len  = count($dtype) ;
+$len  = count($dviews) ;
 
-$delete = "DELETE from table1" ;
-$drop = "DROP TABLE sum" ;
+$delete = "DELETE from user_views" ;
+
 mysqli_select_db($conn, "wiki");
 
-mysqli_query($conn , $drop) ;
+
 $status = mysqli_query($conn , $delete) ;
 
 if(!$status)
@@ -37,7 +40,7 @@ else
 
 for ($i=0; $i < $len ; $i++) { 
 	
-	$query = "insert into table1 values('$dtype[$i]' , '$dname[$i]' , '$dlink[$i]') ;" ;
+	$query = "insert into user_views values('$dviews[$i]' , '$dyear[$i]' , '$dmon[$i]' , '$dt[$i]') ;" ;
 
 mysqli_select_db($conn, "wiki");
 
@@ -56,8 +59,9 @@ else
 } // for loop
 
 
+
  // executing r script 
-exec('"D:\SOFTWARE\R-3.2.3\bin\Rscript.exe" "Rscript.R" 2>&1', $output);
+exec('"D:\SOFTWARE\R-3.2.3\bin\Rscript.exe" "view_analyses.R" 2>&1', $output);
 
   // return image tag
 
@@ -67,6 +71,3 @@ exec('"D:\SOFTWARE\R-3.2.3\bin\Rscript.exe" "Rscript.R" 2>&1', $output);
   echo "<img src='myplot.png?$nocache' /> "; 
 
 ?>
-
-
-

@@ -35,6 +35,11 @@ dbWriteTable(con, name='sum', value=total.df)
 miny <- min(new_num) ;
 maxy <- max(new_num)
 
+if(maxy == 0)
+{
+  maxy <- 1 
+}
+
 png(file="myplot.png")
 xx <- barplot(plot_data$number, main="Analysis of your wiki Topic", xlab="All available links",  
               ylab="Number", names.arg=new_type, 
