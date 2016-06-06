@@ -10,27 +10,50 @@
 <!-- <script src="javaS/first.js"></script> -->
 </head>
 <body>
+<div id="nav">
+<ul>
+  <li id="wikianly"><a href="#"><h3>Wikipedia Analyser</h3></a></li>
+  <li id="help"><a href="help.php"><h4>Help</h4></a></li>
+  <li id="contact"><a href="contact.php"><h4>Contact</h4></a></li>
+  <li id="about"><a href="about.php"><h4>About</h4></a></li>
+</ul>
+</div>
 <div class="container">
-<div id="top">
-  
-  </div>
-  <div id="form">
-  <form action="ajax.php" id="pass" method="post">
-  <input type="hidden" name="type" id="type">
-  <input type="hidden" name="name" id="name">
-  <input type="hidden" name="link" id="link">
-  </form>
 
-  </div>
+<div id="main-analytics" class="text-center container-fluid-scroll">
+<h1>Here's the Analysis Page</h1><br>
+<img src="images/analyses3.png" , height="300px" , width="800px">
 
+
+
+</div>
+
+
+<div id="rows">
   
-  <div id="form2">
-  <form action="ajax2.php" id="pass2" method="post">
-  <input type="hidden" name="views" id="views">
-  <input type="hidden" name="year" id="year">
-  <input type="hidden" name="mon" id="mon">
-  <input type="hidden" name="dt" id="dt">	
+  <div class="col-md-6 text-center">
+      <div id="form">
+      <form action="ajax.php" id="pass" method="post">
+      <input type="hidden" name="type" id="type">
+      <input type="hidden" name="name" id="name">
+      <input type="hidden" name="link" id="link">
+      </form>
+
+      </div>
+  </div>    
+  
+  <div class="col-md-6 text-center">
+      <div id="form2">
+      <form action="ajax2.php" id="pass2" method="post">
+      <input type="hidden" name="views" id="views">
+      <input type="hidden" name="year" id="year">
+      <input type="hidden" name="mon" id="mon">
+      <input type="hidden" name="dt" id="dt">	
+      </form>
+      </div>
   </div>
+</div>
+
   <?php 
   $getvar = $_GET['s'] ;
   ?>
@@ -95,11 +118,13 @@
           	$("#name").val(pass_name);
           	$("#link").val(pass_link);
 
-          	$("#form").append("<button id='click'>alayze</button>");
+          	$("#form").append("<button id='click' class='btn' style='background-color:#01579B;color:white'><h4>Basic Data Analysis</h4></button>");
 
 
           	$("#click").click(function(){
-          		alert("click") ;
+
+              $("#form").append("<br><br><img src='images/basic.gif'><h5><b>Analyzing...</b></h5>")
+              $("#views_btn")[0].disabled = true ;
           		$("#pass").submit();
           	})
 
@@ -159,10 +184,11 @@
           $("#dt").val(pass_dt);
 
 
-          $("#form2").append("<button id='views_btn'>Views</button>") ;
+          $("#form2").append("<button id='views_btn' class='btn' style='background-color:#00796B;color:white'><h4>User Views Analysis</h4></button>") ;
 
           $("#views_btn").click(function(){
-          	alert("dcndkjvnknve") ;
+          	$("#form2").append("<br><br><img src='images/view.gif'><h5><b>Analysing User Views...</b></h5>")
+            $("#click")[0].disabled = true ;
 
           	$("#pass2").submit() ;
           })
@@ -178,6 +204,7 @@
 
 
 </div>
-<body>
+
+</body>
 
 </html>

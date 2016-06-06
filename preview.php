@@ -10,6 +10,17 @@
 
 </head>
 <body>
+
+<div id="nav">
+<ul>
+  <li id="wikianly"><a href="#"><h3>Wikipedia Analyser</h3></a></li>
+  <li id="help"><a href="help.php"><h4>Help</h4></a></li>
+  <li id="contact"><a href="contact.php"><h4>Contact</h4></a></li>
+  <li id="about"><a href="about.php"><h4>About</h4></a></li>
+</ul>
+</div>
+<br><br><br><br>
+
 <div class="container" id="preview">
 
  
@@ -64,17 +75,18 @@ $.ajax({
           extract_data = data["query"].pages[pageid].extract ;
           // console.log("data is : " + extract_data);
          
-          var cont = "<br><br><h2>"+ new_link +"</h2>  \
+          var cont = "<br><br><h2 style='color:black'>"+ new_link +"</h2>  \
 			<br>"
 
 
 			$("#head").append(cont);
-			var show = "<button class='btn btn-block'  id='show'>Click to see the brief introduction</button>"
+			var show = "<button class='btn'  id='show'>Click to see the brief introduction</button>"
 
-			var hide = "<br><button class='btn btn-block'  id='hide'>Click to Hide</button>"
+			var hide = "<br><button class='btn'  id='hide'>Click to Hide</button>"
 			$("#show-btn").append(show);
+      
 
-			var para = "<br><p id='brief'>" + extract_data + "</p>" ;
+			var para = "<br> <div class='well' style='background-color : #006064;'><p id='brief'>" + extract_data + "</p></div>" ;
 			var flag = 0 ;
 
 			$("#show").click(function() {
@@ -87,7 +99,7 @@ $.ajax({
 
 
     			var el2 = $("<div />").css("display", "none").html(hide) ;
-    			$("#inner-para").append(el2);
+    			$("#t").append(el2);
     			el2.slideDown(1000);
  
     			$("#show").hide(1000) ;
@@ -96,7 +108,7 @@ $.ajax({
 
 					$('#hide').live('click', function(){ 
 
- 					$("#hide").hide(500) ;
+ 					$("#t").empty() ;
 					$("#brief").hide(500 , function(){
 						$("#inner-para").empty();
 					});
@@ -105,15 +117,15 @@ $.ajax({
  					})
 
 
-					var wiki = "<br><a href='https://en.wikipedia.org/wiki/"+ link + "' target='_blank'><button class='btn btn-block' id='wiki_btn'>Link to Wikipedia Page</button></a>" ;
+					var wiki = "<br><a href='https://en.wikipedia.org/wiki/"+ link + "' target='_blank'><button class='btn' id='wiki_btn'>WIKI</button></a>" ;
 
 					console.log("value of link is :" + link) ;
 
-					var analyze = "<br><a href='analyze.php?s=" + link + "' target='_blank'><button class='btn btn-circle-lg button'>Analyze</button>" ;
+					var analyze = "<a href='analyze.php?s=" + link + "' target='_blank'><button class='btn' id='analyse-btn'><i class='fa fa-car fa-lg'></i>Analyze</button></a>" ;
 
 
-					$("#wiki-anly").append(wiki) ;
-					$("#wiki-anly").append(analyze) ;
+					$("#w").append(wiki) ;
+					$("#a").append(analyze) ;
 		    
           
 
@@ -137,10 +149,19 @@ $.ajax({
 		<div id="show-btn">
 		</div>
 
+
+   
 		<div id="inner-para">
 		</div>
 
 		<div id="wiki-anly">
+    <div class="rows">
+
+    <div class="col-xs-4"></div>
+    <div class="col-xs-1" id="w"></div>
+    <div class="col-xs-2" id="t"></div>
+    <div class="col-xs-1" id="a"></div>
+    </div>
 		</div>
 
 </div>
